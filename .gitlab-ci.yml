@@ -11,12 +11,12 @@ run unit test and package:
     default: true
     variables: true
     stage:
-      -packaging
+      - packaging
     script:
-      -mvn clean package
+      - mvn clean package
     artifacts:
         paths:
-          -target/*.jar
+          - target/*.jar
     cache:
       paths:
         - .m2/repository/
