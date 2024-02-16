@@ -10,24 +10,22 @@ run unit test and package:
   inherit:
     default: true
     variables: true
-<<<<<<< HEAD
-    stage:
+
+  stage:
       - packaging
-    script:
+  script:
       - mvn clean package
-    artifacts:
+  artifacts:
         paths:
           - target/*.jar
-    cache:
-=======
-  stage:
+  cache:
+    stage:
      - packaging
-  script:
+    script:
     - mvn clean package
-  artifacts:
+    artifacts:
       paths:
        - target/*.jar
-  cache:
->>>>>>> eb76dcfb4f85e669dcfa353f6dbd71b00b471920
+    cache:
       paths:
         - .m2/repository/
