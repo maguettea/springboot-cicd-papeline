@@ -17,10 +17,6 @@ deploy:
   stage: deploy
   script:
     - echo "Deploying the project..."
-<<<<<<< HEAD
-=======
-
->>>>>>> f97a060f1fcfa4fbdb2fedf38c5a1d060ece6b8d
 build docker image:
   image: docker:latest
   stage: build_docker_image
@@ -30,19 +26,14 @@ build docker image:
   services:
     - docker:dind
   script:
-    - docker build -t $DOCKER_USER/samanespringcicd .
-    - docker save $DOCKER_USER/samanespringcicd > samanespringcicd.tar
+    - docker build -t $DOCKER_USER/samanespring .
+    - docker save $DOCKER_USER/samanespring > samanespring.tar
     - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
-    - docker push $DOCKER_USER/samanespringcicd
-<<<<<<< HEAD
-=======
-
->>>>>>> f97a060f1fcfa4fbdb2fedf38c5a1d060ece6b8d
+    - docker push $DOCKER_USER/samanespring
   artifacts:
     paths:
-      - samanespringcicd.tar
+      - samanespring.tar
   when: manual
-<<<<<<< HEAD
 
-=======
->>>>>>> f97a060f1fcfa4fbdb2fedf38c5a1d060ece6b8d
+
+
