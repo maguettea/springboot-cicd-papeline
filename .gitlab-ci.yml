@@ -1,33 +1,38 @@
 stages:
- - packaging
- - build_docker_image
-default:
-  image: maven:3.8.2-openjdk-17
-variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  - build
+  - test
+  - deploy
 
-run unit test and package:
-  inherit:
-    default: true
-    variables: true
-<<<<<<< HEAD
-    stage:
-      - packaging
-    script:
-      - mvn clean package
-    artifacts:
-        paths:
-          - target/*.jar
-    cache:
-=======
-  stage:
-     - packaging
+build:
+  stage: build
   script:
+    - echo "Building the project..."
+
+test:
+  stage: test
+  script:
+    - echo "Running tests..."
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying the project..."
+
+build docker image:
+  image: docker:lastest
+  stage: build_docker_image
+  inherit:
+    default: false
+    variables: false
+  services:
+    - docker:dind
+  script:
+    - docker build -t $DOCKER_USER/samanespringcicd .
+    - docker save  $DOCKER_USER/samanespringcicd > samanespringcicd.tar
+    - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
+    - docker push $DOCKER_USER/samanespringcicd
     - mvn clean package
   artifacts:
-      paths:
-       - target/*.jar
-  cache:
->>>>>>> eb76dcfb4f85e669dcfa353f6dbd71b00b471920
-      paths:
-        - .m2/repository/
+    paths:
+      - samanespringcicd
+  when: manual
