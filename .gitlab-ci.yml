@@ -17,7 +17,6 @@ deploy:
   stage: deploy
   script:
     - echo "Deploying the project..."
-<<<<<<< HEAD
 
 build docker image:
   image: docker:lastest
@@ -37,5 +36,4 @@ build docker image:
     paths:
       - samanespringcicd
   when: manual
-=======
->>>>>>> d27bed04ba0d3757b99e1d5f4a78b2f72a721067
+
