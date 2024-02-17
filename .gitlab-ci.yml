@@ -18,3 +18,21 @@ deploy:
   script:
     - echo "Deploying the project..."
 
+build_docker_image:
+  image: docker:latest
+  stage: build_docker_image
+  inherit:
+    default: false
+    variables: false
+  services:
+    - docker:dind
+  script:
+    - docker build -t $DOCKER_USER/samanespringcicd .
+    - docker save $DOCKER_USER/samanespringcicd > samanespringcicd.tar
+    - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
+    - docker push $DOCKER_USER/samanespringcicd
+    - mvn clean package
+  artifacts:
+    paths:
+      - samanespringcicd
+  when: manual
