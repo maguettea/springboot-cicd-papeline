@@ -17,10 +17,8 @@ deploy:
   stage: deploy
   script:
     - echo "Deploying the project..."
-<<<<<<< HEAD
-
 build docker image:
-  image: docker:lastest
+  image: docker:latest
   stage: build_docker_image
   inherit:
     default: false
@@ -32,10 +30,8 @@ build docker image:
     - docker save  $DOCKER_USER/samanespringcicd > samanespringcicd.tar
     - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
     - docker push $DOCKER_USER/samanespringcicd
-    - mvn clean package
   artifacts:
     paths:
-      - samanespringcicd
+      - samanespringcicd.tar
   when: manual
-=======
->>>>>>> d27bed04ba0d3757b99e1d5f4a78b2f72a721067
+
