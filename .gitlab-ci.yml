@@ -1,4 +1,22 @@
+stages:
+  - build
+  - test
+  - deploy
 
+build:
+  stage: build
+  script:
+    - echo "Building the project..."
+
+test:
+  stage: test
+  script:
+    - echo "Running tests..."
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying the project..."
 
 build docker image:
   image: docker:latest
@@ -16,5 +34,5 @@ build docker image:
 
   artifacts:
     paths:
-      - samanespringcicd
+      - samanespringcicd.tar
   when: manual
