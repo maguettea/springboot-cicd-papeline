@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - deploy
+  - build_docker_image
 
 build:
   stage: build
@@ -17,7 +18,8 @@ deploy:
   stage: deploy
   script:
     - echo "Deploying the project..."
-build docker image:
+
+build_docker_image:
   image: docker:latest
   stage: build_docker_image
   inherit:
@@ -26,21 +28,12 @@ build docker image:
   services:
     - docker:dind
   script:
-    - docker build -t $DOCKER_USER/samanespring .
-    - docker save $DOCKER_USER/samanespring > samanespring.tar
+    - docker build -t $DOCKER_USER/samanespringcicd .
+    - docker save $DOCKER_USER/samanespringcicd > samanespringcicd.tar
     - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
-<<<<<<< HEAD
-    - docker push $DOCKER_USER/samanespring
-=======
     - docker push $DOCKER_USER/samanespringcicd
->>>>>>> 65bfa97c627c473aa7c6fbc5cfa9a54a956382bf
+    - mvn clean package
   artifacts:
     paths:
-      - samanespring.tar
+      - samanespringcicd.tar
   when: manual
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 65bfa97c627c473aa7c6fbc5cfa9a54a956382bf
